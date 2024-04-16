@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         $credentials = $request->all(["email", "password"]);
         if (!$token = auth("api")->attempt($credentials)) {
-            return response()->json(["errors" => "Login e/ou senha invalido"], 401);
+            return response()->json(["errors" => "Login e/ou senha invalido"], 422);
         }
 
         return response()->json(["token" => $token]);

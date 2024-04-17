@@ -8,6 +8,7 @@ use App\Models\Empresa;
 use App\Models\User;
 use App\Models\Vagas;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class EmpresaController extends Controller
 {
@@ -28,7 +29,18 @@ class EmpresaController extends Controller
 
     function create(Request $request)
     {
-        $request->validate($this->empresas->rules(), $this->empresas->feedback());
+        $validator = Validator::make($request->all(), $this->empresas->rules(), $this->empresas->feedback());
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            $errorData = [];
+            foreach ($errors as $key => $value) {
+                foreach ($value as $error) {
+                    $errorData[] = $error;
+                }
+            }
+            return response()->json(["errors" => $errorData], 422);
+        }
 
         $requestData = $request->all();
         $user = new User();

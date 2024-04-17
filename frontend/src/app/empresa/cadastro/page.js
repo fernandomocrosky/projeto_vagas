@@ -1,5 +1,12 @@
+import EmpresaForm from '../../components/EmpresaForm';
+
 function EmpresaCadastroPage() {
-  return <h1>Empresa Cadastro</h1>;
+  return (
+    <div>
+      <h1>Cadastro empresa</h1>
+      <EmpresaForm />
+    </div>
+  );
 }
 
 export default EmpresaCadastroPage;

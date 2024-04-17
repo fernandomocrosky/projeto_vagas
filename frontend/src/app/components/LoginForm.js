@@ -18,14 +18,15 @@ function LoginForm() {
       .then(async (res) => {
         await Swal.fire({
           title: 'success',
-          text: 'Logado com sucess',
+          text: 'Logado com sucesso',
           icon: 'success',
         }).then(() => localStorage.setItem('token', res.data.token));
       })
       .catch(async (err) => {
+        console.log(err);
         await Swal.fire({
           title: 'erro',
-          text: 'Login ou senha invalidos',
+          text: err?.response?.data?.errors[0],
           icon: 'error',
         });
       });

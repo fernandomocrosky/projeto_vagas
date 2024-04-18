@@ -13,3 +13,12 @@ export const registerEmpresa = (data) => {
 export const registerCandidato = (data) => {
   return axios.post(apiRoute + '/usuarios/candidatos', data);
 };
+
+export const getUserByToken = () => {
+  const token = localStorage.getItem('token');
+  return axios.get(apiRoute + '/me', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

@@ -1,9 +1,10 @@
 'use client';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Field, Form, Formik } from 'formik';
 import Swal from 'sweetalert2';
-import { login } from '../../auth/api';
+import { getUserByToken, login } from '../../auth/api';
+import { useUser } from '../_stores/useUser';
+import React from 'react';
 
 const initialValues = {
   email: '',
@@ -12,6 +13,21 @@ const initialValues = {
 
 function LoginForm() {
   const router = useRouter();
+  const { user, setUser, setAuth } = useUser((state) => ({
+    user: state.user,
+    setUser: state.setUser,
+    setAuth: state.setAuth,
+  }));
+
+  React.useEffect(() => {
+    if (user?.auth) {
+      if (user?.role === 'Candidato') {
+        router.push('/candidato');
+      } else {
+        router.push('/empresa');
+      }
+    }
+  }, [user]);
 
   const handleSubmit = (values) => {
     login(values)
@@ -20,7 +36,13 @@ function LoginForm() {
           title: 'success',
           text: 'Logado com sucesso',
           icon: 'success',
-        }).then(() => localStorage.setItem('token', res.data.token));
+        }).then(() => {
+          localStorage.setItem('token', res.data.token);
+          getUserByToken().then((res) => {
+            setUser(res.data);
+            setAuth(true);
+          });
+        });
       })
       .catch(async (err) => {
         console.log(err);
@@ -41,14 +63,14 @@ function LoginForm() {
           type="email"
           name="email"
           id="email"
-          placeholder="email"
+          placeholder="*E-mail"
         />
 
         <Field
           type="password"
           name="password"
           id="password"
-          placeholder="password"
+          placeholder="*Password"
         />
         <button type="submit">Login</button>
       </Form>

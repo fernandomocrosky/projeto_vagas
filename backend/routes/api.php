@@ -9,6 +9,7 @@ use App\Http\Controllers\ExperienciaController;
 use App\Http\Controllers\VagasController;
 
 Route::post("/login", [AuthController::class, "login"]);
+Route::get("/", [AuthController::class, "get"]);
 Route::get("/logout", [AuthController::class, "logout"])->middleware("jwt.auth");
 Route::get("/me", [AuthController::class, "me"])->middleware("jwt.auth");
 

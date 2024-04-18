@@ -37,13 +37,23 @@ class AuthController extends Controller
             return response()->json(["errors" => $errorData], 422);
         }
 
-
         $credentials = $request->all(["email", "password"]);
         if (!$token = auth("api")->attempt($credentials)) {
             return response()->json(["errors" => ["Login e/ou senha invalido"]], 422);
         }
 
         return response()->json(["token" => $token]);
+    }
+
+    public function get()
+    {
+
+        $users = User::join("empresas", "users.id", "=", "empresas.id")
+            ->join("candidatos", "users.id", "=", "candidatos.id")
+            ->orderBy("empresas.name")
+            ->distinct()->get();
+
+        return $users;
     }
 
     public function me()

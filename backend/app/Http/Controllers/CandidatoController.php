@@ -86,6 +86,21 @@ class CandidatoController extends Controller
 
     function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            "name" => "required"
+        ], $this->candidato->feedback());
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            $errorData = [];
+            foreach ($errors as $key => $value) {
+                foreach ($value as $error) {
+                    $errorData[] = $error;
+                }
+            }
+            return response()->json(["errors" => $errorData], 422);
+        }
+
         $requestData = $request->all();
         $candidato = $this->candidato->find($id);
 
@@ -102,7 +117,9 @@ class CandidatoController extends Controller
 
     function delete($id)
     {
-        $candidato = $this->candidato->find($id);
+        $candidato = $this->candidato->with(["user" => function ($query) {
+            $query->delete();
+        }])->find($id);
         if ($candidato != null) {
             $candidato->delete();
             return ["msg" => "deletado com sucesso"];

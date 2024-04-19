@@ -1,25 +1,37 @@
 'use client';
-import React from 'react';
+import { useEffect } from 'react';
 import { useUser } from './_stores/useUser';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { getUserByToken, redirectUser } from '../auth/api';
 
 function Home() {
-  const { user } = useUser((state) => ({
-    user: state.user,
-  }));
   const router = useRouter();
+  const { user, setUser } = useUser((state) => ({
+    user: state.user,
+    setUser: state.setUser,
+  }));
 
-  React.useEffect(() => {
-    if (user?.auth) {
-      if (user?.role === 'Candidato') {
-        router.push('/candidato');
-      } else {
-        router.push('/empresa');
-      }
-    } else {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
       router.push('/login');
+    } else {
+      getUserByToken()
+        .then((res) => {
+          setUser(res.data);
+          if (res?.data?.role === 'Candidato') {
+            console.log(res.data);
+            router.push('/candidato');
+          } else {
+            router.push('/empresa');
+          }
+        })
+        .catch((err) => {
+          router.push('/login');
+        });
     }
-  }, [user]);
+  }, []);
 
   return <div>hello world</div>;
 }

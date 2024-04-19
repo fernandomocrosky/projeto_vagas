@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { updateCandidato } from '../../api';
 import CandidatoForm from '../../../components/CandidatoForm';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
+import { getUserByToken } from '../../../../auth/api';
 
 export default function EditarUsuario({ params }) {
   const router = useRouter();
@@ -17,15 +19,33 @@ export default function EditarUsuario({ params }) {
     email: user.email,
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      router.push('/login');
+    } else {
+      getUserByToken()
+        .then((res) => {
+          setUser(res.data);
+          if (res?.data?.role === 'Empresa') {
+            router.push('/empresa');
+          }
+        })
+        .catch((err) => {
+          router.push('/login');
+        });
+    }
+  }, []);
+
   const handleSubmit = (values) => {
     updateCandidato(values, params.id).then((res) => {
-      setUser(res.data);
       Swal.fire({
         title: 'Sucesso',
         text: 'Sucesso ao editar',
         icon: 'success',
       }).then(() => {
-        router.push('/candidatos');
+        router.push('/candidato');
       });
     });
   };

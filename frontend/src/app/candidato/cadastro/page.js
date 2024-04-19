@@ -3,21 +3,29 @@ import { useRouter } from 'next/navigation';
 import CandidatoForm from '../../components/CandidatoForm';
 import Swal from 'sweetalert2';
 import { useUser } from '../../_stores/useUser';
-import React from 'react';
+import { useEffect } from 'react';
+import { getUserByToken } from '../../../auth/api';
 
 function CadastroCandidatoPage() {
   const router = useRouter();
-  const { user } = useUser((state) => ({
+  const { user, setUser } = useUser((state) => ({
     user: state.user,
+    setUser: state.setUser,
   }));
 
-  React.useEffect(() => {
-    if (user?.auth) {
-      if (user?.role === 'Candidato') {
-        router.push(`/candidato`);
-      }
-      router.push('/empresa');
-    }
+  useEffect(() => {
+    getUserByToken()
+      .then((res) => {
+        setUser(res.data);
+        if (res?.data?.role === 'Candidato') {
+          router.push('/candidato');
+        } else {
+          router.push('/empresa');
+        }
+      })
+      .catch((err) => {
+        router.push('/login');
+      });
   }, []);
 
   const initialValues = {

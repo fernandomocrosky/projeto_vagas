@@ -1,9 +1,5 @@
 'use client';
 import { Formik, Form, Field } from 'formik';
-import { registerCandidato } from '../../auth/api';
-import { useRouter } from 'next/navigation';
-import Swal from 'sweetalert2';
-import LoginFormButtons from './LoginFormButtons';
 import CadastroFormButtons from './CadastroFormButtons';
 import { useUser } from '../_stores/useUser';
 

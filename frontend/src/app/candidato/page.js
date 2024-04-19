@@ -1,21 +1,35 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useUser } from '../_stores/useUser';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { deleteCandidato } from './api';
 import Swal from 'sweetalert2';
+import { getUserByToken } from '../../auth/api';
 
 function CandidatoPage() {
   const router = useRouter();
-  const { user } = useUser((state) => ({
+  const { user, setUser } = useUser((state) => ({
     user: state.user,
+    setUser: state.setUser,
   }));
+  console.log(user);
 
-  React.useEffect(() => {
-    if (!user?.auth) {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
       router.push('/login');
-    } else if (user?.role === 'Empresa') {
-      router.push('/empresa');
+    } else {
+      getUserByToken()
+        .then((res) => {
+          setUser(res.data);
+          if (res?.data?.role === 'Empresa') {
+            router.push('/empresa');
+          }
+        })
+        .catch((err) => {
+          router.push('/login');
+        });
     }
   }, []);
 

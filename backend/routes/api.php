@@ -9,6 +9,7 @@ use App\Http\Controllers\ExperienciaController;
 use App\Http\Controllers\VagasController;
 
 Route::post("/login", [AuthController::class, "login"]);
+Route::get("/", [AuthController::class, "get"]);
 Route::get("/logout", [AuthController::class, "logout"])->middleware("jwt.auth");
 Route::get("/me", [AuthController::class, "me"])->middleware("jwt.auth");
 
@@ -16,6 +17,9 @@ Route::prefix("/usuarios")->group(function () {
   Route::prefix("/candidatos")->controller(CandidatoController::class)->group(function () {
     Route::post("/", "create");
     Route::get("/{id}", "show")->middleware("jwt.auth");
+
+    Route::put("/{id}", "update")->middleware("jwt.auth");
+    Route::delete("/{id}", "delete")->middleware("jwt.auth");
   });
 
   Route::prefix("/empresas")->controller(EmpresaController::class)->group(function () {

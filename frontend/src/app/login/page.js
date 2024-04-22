@@ -6,6 +6,7 @@ import LoginForm from '../components/LoginForm';
 import LoginFormButtons from '../components/LoginFormButtons';
 import { useEffect } from 'react';
 import { getUserByToken } from '../../auth/api';
+import AuthComponent from '../components/AuthComponent';
 
 export function LoginPage() {
   const { user, setUser } = useUser((state) => ({
@@ -37,10 +38,12 @@ export function LoginPage() {
   }, []);
 
   return (
-    <div>
-      <LoginForm />
-      <LoginFormButtons />
-    </div>
+    <AuthComponent>
+      <div>
+        <LoginForm />
+        <LoginFormButtons />
+      </div>
+    </AuthComponent>
   );
 }
 

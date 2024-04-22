@@ -13,21 +13,10 @@ const initialValues = {
 
 function LoginForm() {
   const router = useRouter();
-  const { user, setUser, setAuth } = useUser((state) => ({
+  const { user, setUser } = useUser((state) => ({
     user: state.user,
     setUser: state.setUser,
-    setAuth: state.setAuth,
   }));
-
-  React.useEffect(() => {
-    if (user?.auth) {
-      if (user?.role === 'Candidato') {
-        router.push('/candidato');
-      } else {
-        router.push('/empresa');
-      }
-    }
-  }, [user]);
 
   const handleSubmit = (values) => {
     login(values)
@@ -40,7 +29,11 @@ function LoginForm() {
           localStorage.setItem('token', res.data.token);
           getUserByToken().then((res) => {
             setUser(res.data);
-            setAuth(true);
+            if (res?.data?.role === 'Candidato') {
+              router.push('/candidato');
+            } else {
+              router.push('/empresa');
+            }
           });
         });
       })

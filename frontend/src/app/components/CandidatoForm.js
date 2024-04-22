@@ -23,14 +23,14 @@ function CandidatoForm({ handleSubmit, initialValues }) {
           type="email"
         />
         <Field
-          hidden={user ? true : false}
+          hidden={localStorage.getItem('token') ? true : false}
           name="password"
           id="password"
           placeholder="*Password"
           type="password"
         />
         <Field
-          hidden={user ? true : false}
+          hidden={localStorage.getItem('token') ? true : false}
           name="password_confirmation"
           id="password_confirmation"
           placeholder="*Confirm Password"

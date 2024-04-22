@@ -1,14 +1,9 @@
 'use client';
 
 import { Formik, Form, Field } from 'formik';
-import { useRouter } from 'next/navigation';
-import { registerEmpresa } from '../../auth/api';
-import Swal from 'sweetalert2';
 import CadastroFormButtons from './CadastroFormButtons';
 
 function EmpresaForm({ handleSubmit, initialValues }) {
-  const router = useRouter();
-
   return (
     <Formik
       initialValues={initialValues}
@@ -28,12 +23,14 @@ function EmpresaForm({ handleSubmit, initialValues }) {
           placeholder="*Nome"
         />
         <Field
+          hidden={localStorage.getItem('token') ? true : false}
           name="password"
           id="password"
           type="password"
           placeholder="*Password"
         />
         <Field
+          hidden={localStorage.getItem('token') ? true : false}
           name="password_confirmation"
           id="password_confirmation"
           type="password"
@@ -43,12 +40,6 @@ function EmpresaForm({ handleSubmit, initialValues }) {
           name="ramo"
           id="ramo"
           as="select">
-          <option
-            value=""
-            disabled
-            selected="selected">
-            *Selecione o Ramo
-          </option>
           <option value="Alimentos">Alimentos</option>
           <option value="Quimico">Quimico</option>
           <option value="Tecnologia">Tecnologia</option>

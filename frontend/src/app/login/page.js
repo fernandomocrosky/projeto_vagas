@@ -4,30 +4,46 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '../_stores/useUser';
 import LoginForm from '../components/LoginForm';
 import LoginFormButtons from '../components/LoginFormButtons';
-import React from 'react';
+import { useEffect } from 'react';
+import { getUserByToken } from '../../auth/api';
+import AuthComponent from '../components/AuthComponent';
 
 export function LoginPage() {
-  const { user } = useUser((state) => ({
+  const { user, setUser } = useUser((state) => ({
     user: state.user,
+    setUser: state.setUser,
   }));
 
   const router = useRouter();
 
-  React.useEffect(() => {
-    if (user?.auth) {
-      if (user?.role === 'Candidato') {
-        router.push('/candidato');
-      } else {
-        router.push('/empresa');
-      }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      router.push('/login');
+    } else {
+      getUserByToken()
+        .then((res) => {
+          setUser(res.data);
+          if (res?.data?.role === 'Candidato') {
+            router.push('/candidato');
+          } else {
+            router.push('/empresa');
+          }
+        })
+        .catch((err) => {
+          router.push('/login');
+        });
     }
-  }, [user]);
+  }, []);
 
   return (
-    <div>
-      <LoginForm />
-      <LoginFormButtons />
-    </div>
+    <AuthComponent>
+      <div>
+        <LoginForm />
+        <LoginFormButtons />
+      </div>
+    </AuthComponent>
   );
 }
 

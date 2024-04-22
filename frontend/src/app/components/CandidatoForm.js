@@ -1,9 +1,5 @@
 'use client';
 import { Formik, Form, Field } from 'formik';
-import { registerCandidato } from '../../auth/api';
-import { useRouter } from 'next/navigation';
-import Swal from 'sweetalert2';
-import LoginFormButtons from './LoginFormButtons';
 import CadastroFormButtons from './CadastroFormButtons';
 import { useUser } from '../_stores/useUser';
 
@@ -27,14 +23,14 @@ function CandidatoForm({ handleSubmit, initialValues }) {
           type="email"
         />
         <Field
-          hidden={user ? true : false}
+          hidden={localStorage.getItem('token') ? true : false}
           name="password"
           id="password"
           placeholder="*Password"
           type="password"
         />
         <Field
-          hidden={user ? true : false}
+          hidden={localStorage.getItem('token') ? true : false}
           name="password_confirmation"
           id="password_confirmation"
           placeholder="*Confirm Password"

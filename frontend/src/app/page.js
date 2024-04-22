@@ -1,27 +1,18 @@
 'use client';
-import React from 'react';
 import { useUser } from './_stores/useUser';
-import { useRouter } from 'next/navigation';
+import AuthComponent from './components/AuthComponent';
 
 function Home() {
-  const { user } = useUser((state) => ({
+  const { user, setUser } = useUser((state) => ({
     user: state.user,
+    setUser: state.setUser,
   }));
-  const router = useRouter();
 
-  React.useEffect(() => {
-    if (user?.auth) {
-      if (user?.role === 'Candidato') {
-        router.push('/candidato');
-      } else {
-        router.push('/empresa');
-      }
-    } else {
-      router.push('/login');
-    }
-  }, [user]);
-
-  return <div>hello world</div>;
+  return (
+    <AuthComponent>
+      <h1>Hello World</h1>
+    </AuthComponent>
+  );
 }
 
 export default Home;

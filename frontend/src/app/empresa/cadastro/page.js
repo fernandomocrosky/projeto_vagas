@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import EmpresaForm from '../../components/EmpresaForm';
 import { useUser } from '../../_stores/useUser';
-import React from 'react';
+import { useEffect } from 'react';
 
 function EmpresaCadastroPage() {
   const router = useRouter();
@@ -19,12 +19,22 @@ function EmpresaCadastroPage() {
     ramo: '',
   };
 
-  React.useEffect(() => {
-    if (user?.auth) {
-      if (user?.role === 'Candidato') {
-        router.push(`/candidato`);
-      }
-      router.push('/empresa');
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      getUserByToken()
+        .then((res) => {
+          if (res.data.role === 'Candidato' && JSON.stringify(user) === '{}') {
+            setUser(res.data);
+            router.push('/candidato');
+          } else if (res.data.role === 'Empresa' && JSON.stringify(user) === '{}') {
+            setUser(res.data);
+            router.push('/empresa');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, []);
 

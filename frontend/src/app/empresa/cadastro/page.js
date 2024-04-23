@@ -3,11 +3,14 @@ import { useRouter } from 'next/navigation';
 import EmpresaForm from '../../components/EmpresaForm';
 import { useUser } from '../../_stores/useUser';
 import { useEffect } from 'react';
+import { getUserByToken, registerEmpresa } from '../../../auth/api';
+import Swal from 'sweetalert2';
 
 function EmpresaCadastroPage() {
   const router = useRouter();
   const { user } = useUser((state) => ({
     user: state.user,
+    setUser: state.setUser,
   }));
 
   const initialValues = {
@@ -39,7 +42,6 @@ function EmpresaCadastroPage() {
   }, []);
 
   const handleSubmit = (values) => {
-    console.log(values);
     registerEmpresa(values)
       .then(async (res) => {
         await Swal.fire({

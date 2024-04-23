@@ -69,16 +69,24 @@ class EmpresaController extends Controller
     function update(Request $request, $id)
     {
         $requestData = $request->all();
-        $empresa = $this->empresas->with("vagas")->find($id);
+        $empresa = $this->empresas->with(["vagas", "user"])->find($id);
+        $user = User::find($empresa->user->id);
 
         if ($empresa == null) {
             return ["msg" => "Empresa não encontrada"];
         }
+
         foreach ($requestData as $key => $value) {
             if (key_exists($key, $empresa->toArray())) {
                 $empresa[$key] = $requestData[$key];
             }
         }
+
+        if ($requestData["email"]) {
+            $user->email = $requestData["email"];
+            $user->save();
+        }
+
         $empresa->save();
 
         return $empresa;
@@ -86,7 +94,9 @@ class EmpresaController extends Controller
 
     function delete($id)
     {
-        $empresa = $this->empresas->with("vagas")->find($id);
+        $empresa = $this->empresas->with(["user" => function ($query) {
+            $query->delete();
+        }])->find($id);
 
         if ($empresa == null) return ["msg" => "Empresa não encontrada"];
 

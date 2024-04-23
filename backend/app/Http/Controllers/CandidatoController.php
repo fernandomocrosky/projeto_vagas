@@ -102,17 +102,21 @@ class CandidatoController extends Controller
         }
 
         $requestData = $request->all();
-        $candidato = $this->candidato->find($id);
+        $candidato = $this->candidato->with("user")->find($id);
+        $user = User::find($candidato->user->id);
 
         foreach ($requestData as $key => $value) {
             if (key_exists($key, $candidato->toArray())) {
                 $candidato[$key] = $requestData[$key];
             }
-
-            $candidato->save();
-
-            return $candidato;
         }
+        $candidato->save();
+        if ($requestData['email']) {
+            $user->email = $requestData['email'];
+            $user->save();
+        }
+
+        return $candidato;
     }
 
     function delete($id)

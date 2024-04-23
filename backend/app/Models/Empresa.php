@@ -10,6 +10,7 @@ class Empresa extends Model
     protected $fillable = ["name", "ramo", "descricao"];
     protected $hidden = ["created_at", "updated_at"];
 
+    public $timestamps = false;
     protected $casts = [
         "password" => "hashed"
     ];

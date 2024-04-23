@@ -10,18 +10,18 @@ function EmpresaForm({ handleSubmit, initialValues }) {
       onSubmit={handleSubmit}>
       <Form>
         <Field
+          name="name"
+          id="name"
+          type="text"
+          placeholder="*Nome"
+        />
+        <Field
           name="email"
           id="email"
           type="email"
           placeholder="*E-mail"
         />
 
-        <Field
-          name="name"
-          id="name"
-          type="text"
-          placeholder="*Nome"
-        />
         <Field
           hidden={localStorage.getItem('token') ? true : false}
           name="password"

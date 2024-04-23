@@ -24,6 +24,7 @@ return new class extends Migration
                 ->onDelete("cascade");
 
             $table->primary("id");
+            $table->timestamps();
         });
     }
 

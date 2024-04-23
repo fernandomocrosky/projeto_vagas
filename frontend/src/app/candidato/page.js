@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useUser } from '../_stores/useUser';
-import { deleteCandidato } from './api';
+import { deleteCandidato } from '../_api/candidato';
 import Swal from 'sweetalert2';
 import AuthComponent from '../components/AuthComponent';
 
@@ -28,6 +28,8 @@ function CandidatoPage() {
             title: 'Deletado',
             text: 'Usuário deletado com sucesso',
             icon: 'success',
+          }).then((res) => {
+            localStorage.removeItem('token');
           });
           router.push('/login');
         });

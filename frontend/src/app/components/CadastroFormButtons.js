@@ -6,7 +6,7 @@ export default function CadastroFormButtons({ user }) {
   const router = useRouter();
   return (
     <div>
-      <button type="submit">{user ? 'Editar' : 'Cadastrar'}</button>
+      <button type="submit">{JSON.stringify(user) === '{}' ? 'Cadastrar' : 'Editar'}</button>
       <button
         type="button"
         onClick={() => router.back()}>

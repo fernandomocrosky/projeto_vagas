@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { getUserByToken, login } from '../../auth/api';
 import { useUser } from '../_stores/useUser';
 import React from 'react';
+import styles from '../styles/components/LoginForm.module.css';
 
 const initialValues = {
   email: '',
@@ -52,20 +53,46 @@ function LoginForm() {
       initialValues={initialValues}
       onSubmit={handleSubmit}>
       <Form>
-        <Field
-          type="email"
-          name="email"
-          id="email"
-          placeholder="*E-mail"
-        />
+        <div className={styles.formCard}>
+          <div className={styles.formFields}>
+            <h1>Login</h1>
+            <Field
+              className="form-control"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="*E-mail"
+            />
 
-        <Field
-          type="password"
-          name="password"
-          id="password"
-          placeholder="*Password"
-        />
-        <button type="submit">Login</button>
+            <Field
+              className="form-control"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="*Password"
+            />
+            <div className={styles.loginFormButtons}>
+              <button
+                type="submit"
+                className="btn btn-success">
+                Login
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => router.push('/empresa/cadastro')}>
+                Cadastro Empresa
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-md btn-primary"
+                onClick={() => router.push('/candidato/cadastro')}>
+                Cadastro Candidato
+              </button>
+            </div>
+          </div>
+        </div>
       </Form>
     </Formik>
   );

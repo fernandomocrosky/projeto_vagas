@@ -50,8 +50,16 @@ function HomeEmpresa() {
     <AuthComponent>
       <div>Logado com sucesso como empresa</div>
       <div>
-        <button onClick={() => router.push(`empresa/${user.id}/editar`)}>Editar</button>
-        <button onClick={() => handleDelete(user.id)}>Deletar</button>
+        <button
+          className="btn btn-success"
+          onClick={() => router.push(`empresa/${user.id}/editar`)}>
+          Editar
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleDelete(user.id)}>
+          Deletar
+        </button>
       </div>
     </AuthComponent>
   );

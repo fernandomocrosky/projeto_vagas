@@ -40,8 +40,16 @@ function CandidatoPage() {
   return (
     <AuthComponent>
       <div>
-        <button onClick={() => router.push(`candidato/${user.id}/editar`)}>Editar</button>
-        <button onClick={() => handleDelete(user.id)}>Deletar</button>
+        <button
+          className="btn btn-success"
+          onClick={() => router.push(`candidato/${user.id}/editar`)}>
+          Editar
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleDelete(user.id)}>
+          Deletar
+        </button>
       </div>
     </AuthComponent>
   );

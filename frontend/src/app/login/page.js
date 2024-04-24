@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { useUser } from '../_stores/useUser';
 import LoginForm from '../components/LoginForm';
-import LoginFormButtons from '../components/LoginFormButtons';
 import { useEffect } from 'react';
 import { getUserByToken } from '../../auth/api';
 import AuthComponent from '../components/AuthComponent';
@@ -41,7 +40,6 @@ export function LoginPage() {
     <AuthComponent>
       <div>
         <LoginForm />
-        <LoginFormButtons />
       </div>
     </AuthComponent>
   );

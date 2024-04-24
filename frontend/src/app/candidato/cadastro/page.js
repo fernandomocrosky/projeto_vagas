@@ -3,7 +3,7 @@ import CandidatoForm from '../../components/CandidatoForm';
 import Swal from 'sweetalert2';
 import { useUser } from '../../_stores/useUser';
 import { useEffect } from 'react';
-import { getUserByToken } from '../../../auth/api';
+import { getUserByToken, registerCandidato } from '../../../auth/api';
 import { useRouter } from 'next/navigation';
 
 function CadastroCandidatoPage() {

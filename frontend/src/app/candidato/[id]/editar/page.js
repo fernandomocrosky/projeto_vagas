@@ -1,7 +1,7 @@
 'use client';
 import { useUser } from '../../../_stores/useUser';
 import { useRouter } from 'next/navigation';
-import { updateCandidato } from '../../api';
+import { updateCandidato } from '../../../_api/candidato';
 import CandidatoForm from '../../../components/CandidatoForm';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
@@ -21,20 +21,18 @@ export default function EditarUsuario({ params }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     if (!token) {
       router.push('/login');
     } else {
       getUserByToken()
         .then((res) => {
-          setUser(res.data);
-          if (res?.data?.role === 'Empresa') {
+          if (res.data.role === 'Candidato') {
+            setUser(res.data);
+          } else if (res.data.role === 'Empresa') {
             router.push('/empresa');
           }
         })
-        .catch((err) => {
-          router.push('/login');
-        });
+        .catch((err) => router.push('/login'));
     }
   }, []);
 

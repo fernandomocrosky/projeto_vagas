@@ -1,0 +1,38 @@
+.formCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formFields {
+  width: 60%;
+  padding: 20px;
+}
+
+.formFields input {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+}
+
+.formFields button {
+  margin: 0px;
+}
+
+.loginFormButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 768px) {
+  .loginFormButtons {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loginFormButtons button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

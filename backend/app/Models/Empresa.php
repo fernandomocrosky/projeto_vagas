@@ -10,6 +10,7 @@ class Empresa extends Model
     protected $fillable = ["name", "ramo", "descricao"];
     protected $hidden = ["created_at", "updated_at"];
 
+    public $timestamps = false;
     protected $casts = [
         "password" => "hashed"
     ];
@@ -35,6 +36,7 @@ class Empresa extends Model
             "email.email" => "Email inválido",
             "email.unique" => "Email já existe",
             "name.min" => "O nome precisa ter no minimo 3 caracteres",
+            "name.unique" => "Este nome já existe",
             "password.min" => "Senha precisa ter no minimo 8 caracteres",
             "password.confirmed" => "Senhas não batem",
             "descricao.min" => "Descricao precisa ter no minimo 20 caracteres",

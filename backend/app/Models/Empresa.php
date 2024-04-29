@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empresa extends Model
 {
-    protected $fillable = ["name", "ramo", "descricao"];
+    protected $fillable = ["nome", "ramo", "descricao"];
     protected $hidden = ["created_at", "updated_at"];
 
     public $timestamps = false;
@@ -22,8 +22,8 @@ class Empresa extends Model
     {
         return [
             "email" => "required|email|unique:users",
-            "password" => "required|min:8|confirmed",
-            "name" => "required|min:3",
+            "password" => "required|min:8",
+            "nome" => "required|min:3",
             "descricao" => "required|min:20",
             "ramo" => "required|min:4"
         ];
@@ -35,10 +35,9 @@ class Empresa extends Model
             "required" => "O campo :attribute é obrigatório",
             "email.email" => "Email inválido",
             "email.unique" => "Email já existe",
-            "name.min" => "O nome precisa ter no minimo 3 caracteres",
-            "name.unique" => "Este nome já existe",
+            "nome.min" => "O nome precisa ter no minimo 3 caracteres",
+            "nome.unique" => "Este nome já existe",
             "password.min" => "Senha precisa ter no minimo 8 caracteres",
-            "password.confirmed" => "Senhas não batem",
             "descricao.min" => "Descricao precisa ter no minimo 20 caracteres",
             "ramo.min" => "Ramo precisa ter no minimo 4 caracteres"
         ];

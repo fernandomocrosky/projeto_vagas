@@ -45,12 +45,12 @@ class EmpresaController extends Controller
         $requestData = $request->all();
         $user = new User();
         $empresa = new Empresa();
-        $user->role = "Empresa";
+        $user->tipo = "Empresa";
         $user->email = $requestData["email"];
         $user->password = $requestData["password"];
         $user->save();
 
-        $empresa->name = $requestData["name"];
+        $empresa->nome = $requestData["nome"];
         $empresa->descricao = $requestData["descricao"];
         $empresa->ramo = $requestData["ramo"];
         $empresa->user()->associate($user);

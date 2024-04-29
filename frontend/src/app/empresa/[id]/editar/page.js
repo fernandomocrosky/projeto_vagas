@@ -15,7 +15,7 @@ function EmpresaEditPage({ params }) {
   }));
 
   const initialValues = {
-    name: user.name,
+    nome: user.nome,
     email: user.email,
     descricao: user.descricao,
     ramo: user.ramo,

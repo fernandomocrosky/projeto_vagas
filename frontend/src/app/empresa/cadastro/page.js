@@ -15,9 +15,8 @@ function EmpresaCadastroPage() {
 
   const initialValues = {
     email: '',
-    password_confirmation: '',
     password: '',
-    name: '',
+    nome: '',
     descricao: '',
     ramo: '',
   };
@@ -27,10 +26,10 @@ function EmpresaCadastroPage() {
     if (token) {
       getUserByToken()
         .then((res) => {
-          if (res.data.role === 'Candidato' && JSON.stringify(user) === '{}') {
+          if (res.data.tipo === 'Candidato' && JSON.stringify(user) === '{}') {
             setUser(res.data);
             router.push('/candidato');
-          } else if (res.data.role === 'Empresa' && JSON.stringify(user) === '{}') {
+          } else if (res.data.tipo === 'Empresa' && JSON.stringify(user) === '{}') {
             setUser(res.data);
             router.push('/empresa');
           }

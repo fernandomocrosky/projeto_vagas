@@ -15,7 +15,7 @@ function EmpresaCadastroPage() {
 
   const initialValues = {
     email: '',
-    password: '',
+    senha: '',
     nome: '',
     descricao: '',
     ramo: '',

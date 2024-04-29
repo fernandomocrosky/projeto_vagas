@@ -48,13 +48,12 @@ class CandidatoController extends Controller
         $requestData = $request->all();
         $user = new User();
         $user->email = $requestData["email"];
-        $user->password = $requestData["password"];
+        $user->senha = $requestData["senha"];
         $user->tipo = "Candidato";
         $user->save();
 
         $candidato = new Candidato();
         $candidato->nome = $requestData["nome"];
-
         $candidato->user()->associate($user);
         $candidato->save();
 

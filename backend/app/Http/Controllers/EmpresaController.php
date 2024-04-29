@@ -47,7 +47,7 @@ class EmpresaController extends Controller
         $empresa = new Empresa();
         $user->tipo = "Empresa";
         $user->email = $requestData["email"];
-        $user->password = $requestData["password"];
+        $user->senha = $requestData["senha"];
         $user->save();
 
         $empresa->nome = $requestData["nome"];

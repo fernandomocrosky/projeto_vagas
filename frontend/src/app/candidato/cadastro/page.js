@@ -16,7 +16,7 @@ function CadastroCandidatoPage() {
   const initialValues = {
     name: '',
     email: '',
-    password: '',
+    senha: '',
   };
 
   useEffect(() => {

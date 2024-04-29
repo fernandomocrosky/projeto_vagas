@@ -15,7 +15,7 @@ Route::get("/me", [AuthController::class, "me"])->middleware("jwt.auth");
 
 Route::prefix("/usuarios")->group(function () {
 
-  Route::prefix("/candidatos")->controller(CandidatoController::class)->group(function () {
+  Route::prefix("/candidato")->controller(CandidatoController::class)->group(function () {
     Route::post("/", "create");
     Route::get("/{id}", "show")->middleware("jwt.auth");
 
@@ -23,7 +23,7 @@ Route::prefix("/usuarios")->group(function () {
     Route::delete("/{id}", "delete")->middleware("jwt.auth");
   });
 
-  Route::prefix("/empresas")->controller(EmpresaController::class)->group(function () {
+  Route::prefix("/empresa")->controller(EmpresaController::class)->group(function () {
     Route::get("/", "list");
     Route::post("/", "create");
 

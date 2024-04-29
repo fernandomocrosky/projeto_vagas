@@ -12,16 +12,16 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $requestData = $request->all(["email", "password"]);
+        $requestData = $request->all(["email", "senha"]);
         $rules = [
             "email" => "required|email",
-            "password" => "required|min:8"
+            "senha" => "required|min:8"
         ];
 
         $feedback = [
             "required" => "O campo :attribute é obrigatório",
             "email.email" => "Email inválido",
-            "password.min" => "Senha deve ter no minimo 8 caracteres"
+            "senha.min" => "Senha deve ter no minimo 8 caracteres"
         ];
 
         $validator = Validator::make($requestData, $rules, $feedback);
@@ -37,7 +37,9 @@ class AuthController extends Controller
             return response()->json(["errors" => $errorData], 422);
         }
 
-        $credentials = $request->all(["email", "password"]);
+        $credentials = $request->all(["email", "senha"]);
+        $credentials["password"] = $requestData["senha"];
+        unset($credentials["senha"]);
         if (!$token = auth("api")->attempt($credentials)) {
             return response()->json(["errors" => ["Login e/ou senha invalido"]], 422);
         }

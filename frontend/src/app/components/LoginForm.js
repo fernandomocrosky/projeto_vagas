@@ -9,7 +9,7 @@ import styles from '../styles/components/LoginForm.module.css';
 
 const initialValues = {
   email: '',
-  password: '',
+  senha: '',
 };
 
 function LoginForm() {
@@ -67,8 +67,8 @@ function LoginForm() {
             <Field
               className="form-control"
               type="password"
-              name="password"
-              id="password"
+              name="senha"
+              id="senha"
               placeholder="*Password"
             />
             <div className={styles.loginFormButtons}>

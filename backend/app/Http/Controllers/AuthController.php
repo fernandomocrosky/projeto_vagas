@@ -60,14 +60,14 @@ class AuthController extends Controller
     {
         $me = auth("api")->user();
         $user = null;
-        if ($me->role === "Empresa") {
+        if ($me->tipo === "Empresa") {
             $user = Empresa::find($me->id);
 
             return [
                 "id" => $me->id,
                 "email" => $me->email,
-                "role" => $me->role,
-                "name" => $user->name,
+                "tipo" => $me->tipo,
+                "nome" => $user->nome,
                 "ramo" => $user->ramo,
                 "descricao" => $user->descricao
             ];
@@ -76,8 +76,8 @@ class AuthController extends Controller
             return [
                 "id" => $me->id,
                 "email" => $me->email,
-                "role" => $me->role,
-                "name" => $user->name
+                "tipo" => $me->tipo,
+                "nome" => $user->nome
             ];
         }
     }

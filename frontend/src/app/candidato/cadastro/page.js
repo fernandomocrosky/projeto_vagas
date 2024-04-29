@@ -17,7 +17,6 @@ function CadastroCandidatoPage() {
     name: '',
     email: '',
     password: '',
-    password_confirmation: '',
   };
 
   useEffect(() => {

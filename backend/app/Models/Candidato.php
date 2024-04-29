@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidato extends Model
 {
-    protected $fillable = ["name"];
+    protected $fillable = ["nome"];
     protected $hidden = ["password"];
     public $timestamps = false;
 
@@ -20,8 +20,8 @@ class Candidato extends Model
     {
         return [
             "email" => "required|email|unique:users",
-            "password" => "required|min:8|confirmed",
-            "name" => "required|min:3"
+            "password" => "required|min:8",
+            "nome" => "required|min:3"
         ];
     }
 
@@ -31,9 +31,8 @@ class Candidato extends Model
             "required" => "O :attribute é obrigatório",
             "email.email" => "Email invalido",
             "email.unique" => "Email já existe",
-            "name.min" => "O nome deve ter no minimo 3 caracteres",
+            "nome.min" => "O nome deve ter no minimo 3 caracteres",
             "password.min" => "A senha deve ter no minimo 8 caracteres",
-            "password.confirmed" => "As senhas não batem"
         ];
     }
 

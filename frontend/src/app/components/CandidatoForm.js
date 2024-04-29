@@ -15,8 +15,8 @@ function CandidatoForm({ handleSubmit, initialValues }) {
           <div className={styles.formFields}>
             <Field
               className="form-control"
-              name="name"
-              id="name"
+              name="nome"
+              id="nome"
               placeholder="*Nome"
               type="text"
             />
@@ -35,14 +35,14 @@ function CandidatoForm({ handleSubmit, initialValues }) {
               placeholder="*Password"
               type="password"
             />
-            <Field
+            {/* <Field
               className="form-control"
               hidden={localStorage.getItem('token') ? true : false}
               name="password_confirmation"
               id="password_confirmation"
               placeholder="*Confirm Password"
               type="password"
-            />
+            /> */}
             <CadastroFormButtons user={user} />
           </div>
         </div>

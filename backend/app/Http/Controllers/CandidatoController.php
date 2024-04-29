@@ -49,11 +49,11 @@ class CandidatoController extends Controller
         $user = new User();
         $user->email = $requestData["email"];
         $user->password = $requestData["password"];
-        $user->role = "Candidato";
+        $user->tipo = "Candidato";
         $user->save();
 
         $candidato = new Candidato();
-        $candidato->name = $requestData["name"];
+        $candidato->nome = $requestData["nome"];
 
         $candidato->user()->associate($user);
         $candidato->save();
@@ -73,7 +73,7 @@ class CandidatoController extends Controller
             $user = $this->user->find($id);
 
             return [
-                "nome" => $candidato->name,
+                "nome" => $candidato->nome,
                 "email" => $user->email,
                 "competencias" => $candidato->competencias,
                 "vagas" => $candidato->vagas,
@@ -81,13 +81,13 @@ class CandidatoController extends Controller
             ];
         };
 
-        return ["errors" => ["Candidato não existe"]];
+        return response()->json(["errors" => ["Candidato não existe"]], 422);
     }
 
     function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            "name" => "required"
+            "nome" => "required"
         ], $this->candidato->feedback());
 
         if ($validator->fails()) {
@@ -128,6 +128,6 @@ class CandidatoController extends Controller
             $candidato->delete();
             return ["msg" => "deletado com sucesso"];
         }
-        return ["msg" => "Candidato não existe"];
+        return response()->json(["msg" => "Candidato não existe"], 422);
     }
 }

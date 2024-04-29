@@ -15,8 +15,8 @@ function EmpresaForm({ handleSubmit, initialValues }) {
           <div className={styles.formFields}>
             <Field
               className="form-control"
-              name="name"
-              id="name"
+              name="nome"
+              id="nome"
               type="text"
               placeholder="*Nome"
             />
@@ -36,14 +36,14 @@ function EmpresaForm({ handleSubmit, initialValues }) {
               type="password"
               placeholder="*Password"
             />
-            <Field
+            {/* <Field
               className="form-control"
               hidden={localStorage.getItem('token') ? true : false}
               name="password_confirmation"
               id="password_confirmation"
               type="password"
               placeholder="*Confirm Password"
-            />
+            /> */}
             <Field
               className="form-control mt-3"
               name="ramo"

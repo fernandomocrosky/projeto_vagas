@@ -4,6 +4,7 @@ import { useUser } from '../_stores/useUser';
 import { deleteCandidato } from '../_api/candidato';
 import Swal from 'sweetalert2';
 import AuthComponent from '../components/AuthComponent';
+import LogoutButton from '../components/LogoutButton';
 
 function CandidatoPage() {
   const router = useRouter();
@@ -23,7 +24,7 @@ function CandidatoPage() {
       confirmButtonText: 'Sim!',
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteCandidato(user.id).then((res) => {
+        deleteCandidato().then((res) => {
           Swal.fire({
             title: 'Deletado',
             text: 'Usuário deletado com sucesso',
@@ -50,6 +51,7 @@ function CandidatoPage() {
           onClick={() => handleDelete(user.id)}>
           Deletar
         </button>
+        <LogoutButton />
       </div>
     </AuthComponent>
   );

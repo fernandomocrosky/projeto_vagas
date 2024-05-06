@@ -37,7 +37,7 @@ export default function EditarUsuario({ params }) {
   }, []);
 
   const handleSubmit = (values) => {
-    updateCandidato(values, params.id).then((res) => {
+    updateCandidato(values).then((res) => {
       Swal.fire({
         title: 'Sucesso',
         text: 'Sucesso ao editar',

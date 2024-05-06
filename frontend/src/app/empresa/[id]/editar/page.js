@@ -22,7 +22,7 @@ function EmpresaEditPage({ params }) {
   };
 
   const handleSubmit = (values) => {
-    updateEmpresa(values, params.id)
+    updateEmpresa(values)
       .then((res) => {
         Swal.fire({
           title: 'Sucesso',

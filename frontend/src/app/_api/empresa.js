@@ -2,16 +2,16 @@ import axios from 'axios';
 
 const apiRoute = process.env.NEXT_PUBLIC_API_ROUTE;
 
-export const updateEmpresa = (data, id) => {
-  return axios.put(`${apiRoute}/usuarios/empresa/${id}`, data, {
+export const updateEmpresa = (data) => {
+  return axios.put(`${apiRoute}/usuario`, data, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 };
 
-export const deleteEmpresa = (id) => {
-  return axios.delete(`${apiRoute}/usuarios/empresa/${id}`, {
+export const deleteEmpresa = () => {
+  return axios.delete(`${apiRoute}/usuario`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },

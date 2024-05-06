@@ -6,6 +6,15 @@ export const login = (data) => {
   return axios.post(apiRoute + '/login', data);
 };
 
+export const logout = () => {
+  const token = localStorage.getItem('token');
+  return axios.get(apiRoute + '/logout', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const registerEmpresa = (data) => {
   return axios.post(apiRoute + '/usuarios/empresa', data);
 };
@@ -16,7 +25,7 @@ export const registerCandidato = (data) => {
 
 export const getUserByToken = () => {
   const token = localStorage.getItem('token');
-  return axios.get(apiRoute + '/me', {
+  return axios.get(apiRoute + '/usuario', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

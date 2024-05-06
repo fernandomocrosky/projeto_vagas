@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Models\Empresa;
 use App\Models\User;
-use App\Models\Vagas;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class EmpresaController extends Controller

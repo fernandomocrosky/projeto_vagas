@@ -9,7 +9,7 @@ export const updateEmpresa = (data) => {
     },
   });
 };
-
+.
 export const deleteEmpresa = () => {
   return axios.delete(`${apiRoute}/usuario`, {
     headers: {

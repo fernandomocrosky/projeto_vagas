@@ -21,12 +21,12 @@ Route::prefix("/usuario")->middleware("jwt.auth")->group(function () {
 
 Route::prefix("/usuarios")->group(function () {
 
-  Route::prefix("/candidatos")->controller(CandidatoController::class)->group(function () {
+  Route::prefix("/candidato")->controller(CandidatoController::class)->group(function () {
     Route::post("/", "create");
     Route::get("/{id}", "show")->middleware("jwt.auth");
   });
 
-  Route::prefix("/empresas")->controller(EmpresaController::class)->group(function () {
+  Route::prefix("/empresa")->controller(EmpresaController::class)->group(function () {
     Route::get("/", "list");
     Route::post("/", "create");
 

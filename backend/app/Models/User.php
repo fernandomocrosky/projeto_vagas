@@ -22,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'email',
-        'password',
+        'senha',
         "tipo"
     ];
 
@@ -48,8 +48,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed'
+            'senha' => 'hashed'
         ];
+    }
+
+    public function getAuthPassword() {
+        return $this->senha;
     }
 
     public function getJWTIdentifier()

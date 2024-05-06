@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Candidato extends Model
 {
     protected $fillable = ["nome"];
-    protected $hidden = ["password"];
+    protected $hidden = ["senha"];
     public $timestamps = false;
 
 
     protected $casts = [
-        "password" => "hashed"
+        "senha" => "hashed"
     ];
 
     public function rules()
     {
         return [
             "email" => "required|email|unique:users",
-            "password" => "required|min:8",
+            "senha" => "required|min:8",
             "nome" => "required|min:3"
         ];
     }
@@ -32,7 +32,7 @@ class Candidato extends Model
             "email.email" => "Email invalido",
             "email.unique" => "Email já existe",
             "nome.min" => "O nome deve ter no minimo 3 caracteres",
-            "password.min" => "A senha deve ter no minimo 8 caracteres",
+            "senha.min" => "A senha deve ter no minimo 8 caracteres",
         ];
     }
 

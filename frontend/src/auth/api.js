@@ -16,11 +16,11 @@ export const logout = () => {
 };
 
 export const registerEmpresa = (data) => {
-  return axios.post(apiRoute + '/usuarios/empresas', data);
+  return axios.post(apiRoute + '/usuarios/empresa', data);
 };
 
 export const registerCandidato = (data) => {
-  return axios.post(apiRoute + '/usuarios/candidatos', data);
+  return axios.post(apiRoute + '/usuarios/candidato', data);
 };
 
 export const getUserByToken = () => {

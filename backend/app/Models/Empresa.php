@@ -12,7 +12,7 @@ class Empresa extends Model
 
     public $timestamps = false;
     protected $casts = [
-        "password" => "hashed"
+        "senha" => "hashed"
     ];
 
     use HasFactory;
@@ -22,7 +22,7 @@ class Empresa extends Model
     {
         return [
             "email" => "required|email|unique:users",
-            "password" => "required|min:8",
+            "senha" => "required|min:8",
             "nome" => "required|min:3",
             "descricao" => "required|min:20",
             "ramo" => "required|min:4"
@@ -37,7 +37,7 @@ class Empresa extends Model
             "email.unique" => "Email já existe",
             "nome.min" => "O nome precisa ter no minimo 3 caracteres",
             "nome.unique" => "Este nome já existe",
-            "password.min" => "Senha precisa ter no minimo 8 caracteres",
+            "senha.min" => "Senha precisa ter no minimo 8 caracteres",
             "descricao.min" => "Descricao precisa ter no minimo 20 caracteres",
             "ramo.min" => "Ramo precisa ter no minimo 4 caracteres"
         ];

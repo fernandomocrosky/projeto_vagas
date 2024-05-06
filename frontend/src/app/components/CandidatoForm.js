@@ -30,8 +30,8 @@ function CandidatoForm({ handleSubmit, initialValues }) {
             <Field
               className="form-control"
               hidden={localStorage.getItem('token') ? true : false}
-              name="password"
-              id="password"
+              name="senha"
+              id="senha"
               placeholder="*Password"
               type="password"
             />

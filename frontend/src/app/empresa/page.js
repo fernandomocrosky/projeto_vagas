@@ -4,6 +4,7 @@ import { useUser } from '../_stores/useUser';
 import AuthComponent from '../components/AuthComponent';
 import { deleteEmpresa } from '../_api/empresa';
 import Swal from 'sweetalert2';
+import LogoutButton from '../components/LogoutButton';
 
 function HomeEmpresa() {
   const router = useRouter();
@@ -23,7 +24,7 @@ function HomeEmpresa() {
       confirmButtonText: 'Sim, deletar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmpresa(id)
+        deleteEmpresa()
           .then((res) => {
             Swal.fire({
               title: 'Deletado',
@@ -60,6 +61,7 @@ function HomeEmpresa() {
           onClick={() => handleDelete(user.id)}>
           Deletar
         </button>
+        <LogoutButton />
       </div>
     </AuthComponent>
   );

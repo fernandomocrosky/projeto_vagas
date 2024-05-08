@@ -54,7 +54,7 @@ class EmpresaController extends Controller
         $empresa->user()->associate($user);
         $empresa->save();
 
-        return $empresa->with("user")->find($user->id);
+        return response()->json(["mensagem" => "Usuário cadastrado com sucesso"], 201);
     }
 
     function show($id)
@@ -99,6 +99,6 @@ class EmpresaController extends Controller
         if ($empresa == null) return ["msg" => "Empresa não encontrada"];
 
         $empresa = $empresa->delete();
-        if ($empresa) return ["msg" => "Deletado com sucesso"];
+        if ($empresa) return response()->json(["msg" => "Deletado com sucesso"], 200);
     }
 }

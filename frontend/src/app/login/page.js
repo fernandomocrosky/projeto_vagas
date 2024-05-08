@@ -24,7 +24,7 @@ export function LoginPage() {
       getUserByToken()
         .then((res) => {
           setUser(res.data);
-          if (res?.data?.role === 'Candidato') {
+          if (res?.data?.tipo.toLowerCase() === 'candidato') {
             router.push('/candidato');
           } else {
             router.push('/empresa');

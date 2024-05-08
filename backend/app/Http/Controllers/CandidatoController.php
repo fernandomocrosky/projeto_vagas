@@ -57,7 +57,7 @@ class CandidatoController extends Controller
         $candidato->user()->associate($user);
         $candidato->save();
 
-        return $candidato->with("user")->find($user->id);
+        return response()->json($candidato->with("user")->find($user->id), 201);
     }
 
     function show($id)

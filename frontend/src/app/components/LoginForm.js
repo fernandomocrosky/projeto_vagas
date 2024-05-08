@@ -30,7 +30,7 @@ function LoginForm() {
           localStorage.setItem('token', res.data.token);
           getUserByToken().then((res) => {
             setUser(res.data);
-            if (res?.data?.tipo === 'Candidato') {
+            if (res?.data?.tipo.toLowerCase() === 'candidato') {
               router.push('/candidato');
             } else {
               router.push('/empresa');

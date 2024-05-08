@@ -44,7 +44,7 @@ class AuthController extends Controller
             return response()->json(["errors" => ["Login e/ou senha invalido"]], 422);
         }
 
-        return response()->json(["token" => $token]);
+        return response()->json(["token" => $token], 200);
     }
 
     public function get()
@@ -65,22 +65,22 @@ class AuthController extends Controller
         if ($me->tipo === "Empresa") {
             $user = Empresa::find($me->id);
 
-            return [
+            return response()->json([
                 "id" => $me->id,
                 "email" => $me->email,
                 "tipo" => $me->tipo,
                 "nome" => $user->nome,
                 "ramo" => $user->ramo,
                 "descricao" => $user->descricao
-            ];
+            ], 200);
         } else {
             $user = Candidato::find($me->id);
-            return [
+            return response()->json([
                 "id" => $me->id,
                 "email" => $me->email,
                 "tipo" => $me->tipo,
                 "nome" => $user->nome
-            ];
+            ], 200);
         }
     }
 
@@ -88,6 +88,6 @@ class AuthController extends Controller
     {
         $me = auth("api")->logout(true);
 
-        return ["msg" => "Logout realizado"];
+        return response()->json(["mensagem" => "Sucesso"], 200);
     }
 }

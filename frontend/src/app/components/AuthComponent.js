@@ -20,10 +20,10 @@ function AuthComponent({ children }) {
     } else {
       getUserByToken()
         .then((res) => {
-          if (res.data.tipo === 'Candidato') {
+          if (res.data.tipo.toLowerCase() === 'candidato') {
             setUser(res.data);
             router.push('/candidato');
-          } else if (res.data.tipo === 'Empresa') {
+          } else if (res.data.tipo.toLowerCase() === 'empresa') {
             setUser(res.data);
             router.push('/empresa');
           }

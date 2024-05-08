@@ -14,7 +14,7 @@ class UserController extends Controller
         $requestData = $request->all();
         $user = auth("api")->user();
         if ($user->tipo === "Empresa") {
-            $user = User::with("empresa")->find($user->id);
+            $userToUpdate = User::with("empresa")->find($user->id);
             $empresa = Empresa::find($user->id);
             foreach ($requestData as $key => $value) {
                 if (key_exists($key, $empresa->toArray())) {
@@ -23,15 +23,15 @@ class UserController extends Controller
             }
 
             if ($requestData["email"]) {
-                $user->email = $requestData["email"];
-                $user->save();
+                $userToUpdate->email = $requestData["email"];
+                $userToUpdate->save();
             }
 
             $empresa->save();
-            return $user->with("empresa")->get();
+            return response()->json($userToUpdate->with("empresa")->find($user->id), 200);
         }
 
-        $user = User::with("empresa")->find($user->id);
+        $userToUpdate = User::with("empresa")->find($user->id);
         $candidato = Candidato::find($user->id);
         foreach ($requestData as $key => $value) {
             if (key_exists($key, $candidato->toArray())) {
@@ -40,13 +40,13 @@ class UserController extends Controller
         }
 
         if ($requestData["email"]) {
-            $user->email = $requestData["email"];
-            $user->save();
+            $userToUpdate->email = $requestData["email"];
+            $userToUpdate->save();
         }
 
         $candidato->save();
 
-        return $user->with("candidato")->get();
+        return response()->json($userToUpdate->with("candidato")->find($user->id), 200);
     }
 
     public function delete()
@@ -63,6 +63,6 @@ class UserController extends Controller
             $query->delete();
         }])->find($user->id);
         $user->delete();
-        return ["msg" => "Deletado com sucesso"];
+        return response()->json(["msg" => "Deletado com sucesso"], 200);
     }
 }

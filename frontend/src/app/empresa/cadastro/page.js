@@ -26,10 +26,10 @@ function EmpresaCadastroPage() {
     if (token) {
       getUserByToken()
         .then((res) => {
-          if (res.data.tipo === 'Candidato' && JSON.stringify(user) === '{}') {
+          if (res.data.tipo.toLowerCase() === 'candidato' && JSON.stringify(user) === '{}') {
             setUser(res.data);
             router.push('/candidato');
-          } else if (res.data.tipo === 'Empresa' && JSON.stringify(user) === '{}') {
+          } else if (res.data.tipo.toLowerCase() === 'empresa' && JSON.stringify(user) === '{}') {
             setUser(res.data);
             router.push('/empresa');
           }

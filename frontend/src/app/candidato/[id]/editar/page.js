@@ -26,9 +26,9 @@ export default function EditarUsuario({ params }) {
     } else {
       getUserByToken()
         .then((res) => {
-          if (res.data.role === 'Candidato') {
+          if (res.data.tipo.toLowerCase() === 'candidato') {
             setUser(res.data);
-          } else if (res.data.role === 'Empresa') {
+          } else if (res.data.tipo.toLowerCase() === 'empresa') {
             router.push('/empresa');
           }
         })

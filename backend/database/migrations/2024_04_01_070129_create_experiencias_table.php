@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('experiencias', function (Blueprint $table) {
             $table->id();
-            $table->string("empresa", 60);
-            $table->date("data_inicio");
-            $table->date("data_termino")->nullable();
-            $table->timestamps();
-
             $table
                 ->foreignId("candidato_id")
                 ->references("id")
                 ->on("candidatos")
                 ->onDelete("cascade")
                 ->onUpdate("cascade");
+            $table->string("nome_empresa", 60);
+            $table->date("inicio");
+            $table->date("fim")->nullable();
+            $table->string("cargo");
+            $table->timestamps();
         });
     }
 

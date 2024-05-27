@@ -74,12 +74,14 @@ class AuthController extends Controller
                 "descricao" => $user->descricao
             ], 200);
         } else {
-            $user = Candidato::find($me->id);
+            $user = Candidato::with("competencias")->find($me->id);
             return response()->json([
                 "id" => $me->id,
                 "email" => $me->email,
                 "tipo" => $me->tipo,
-                "nome" => $user->nome
+                "nome" => $user->nome,
+                "competencias" => $user->competencias,
+                "experiencias" => $user->experiencias
             ], 200);
         }
     }

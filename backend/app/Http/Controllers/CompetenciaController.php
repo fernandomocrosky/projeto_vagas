@@ -4,67 +4,80 @@ namespace App\Http\Controllers;
 
 use App\Models\Competencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CompetenciaController extends Controller
 {
-    protected $competencias;
-
-    public function __construct(Competencia $competencias)
-    {
-        $this->competencias = $competencias;
-    }
 
     function list()
     {
-        $competencias = $this->competencias->with("candidatos")->get();
+        $competencias = Competencia::all();
 
-        if ($competencias->toArray()) return $competencias;
+        if ($competencias) return $competencias;
 
-        return ["msg" => "Não encontrado"];
+        return response()->json(["msg" => "Nenhuma competencia", 422]);
     }
 
     function create(Request $request)
     {
-        $requestData = $request->all();
-        $competencia = $this->competencias->create($requestData);
+        $rules = [
+            "nome" => "required|unique:competencias"
+        ];
+
+        $feedback = [
+            "nome.required" => "O campo nome é obrigatório",
+            "nome.unique" => "Competencia já existe",
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $feedback);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->all(), 422);
+        }
+
+        $competencia = Competencia::create([
+            "nome" => $request->nome
+        ]);
+
         if (!$competencia) return ["msg" => "Erro"];
-        return $competencia;
+        return response()->json($competencia, 201);
     }
 
-    function show($id)
-    {
-        $competencia = $this->competencias->find($id);
+    // function show($id)
+    // {
+    //     $competencia = $this->competencias->find($id);
 
-        if ($competencia) return $competencia;
+    //     if ($competencia) return $competencia;
 
-        return ["msg" => "Não encontrado"];
-    }
+    //     return ["msg" => "Não encontrado"];
+    // }
 
-    function update(Request $request, $id)
-    {
-        $requestData = $request->all();
-        $competencia  = $this->competencias->find($id);
+    // function update(Request $request, $id)
+    // {
+    //     $requestData = $request->all();
+    //     $competencia  = $this->competencias->find($id);
 
-        if ($competencia) {
-            foreach ($requestData as $key => $value) {
-                $competencia[$key] = $requestData[$key];
-            }
+    //     if ($competencia) {
+    //         foreach ($requestData as $key => $value) {
+    //             $competencia[$key] = $requestData[$key];
+    //         }
 
-            $competencia->save();
-            return $competencia;
-        }
-        return ["msg" => "Não encontrado"];
-    }
+    //         $competencia->save();
+    //         return $competencia;
+    //     }
+    //     return ["msg" => "Não encontrado"];
+    // }
 
-    function delete($id)
-    {
-        $competencia = $this->competencias->find($id);
+    // function delete($id)
+    // {
+    //     $competencia = Competencia::find($id);
 
-        if ($competencia) {
-            $success = $competencia->delete();
-            $msg = $success ? ["msg" => "deletado com sucesso"] : ["msg" => "Erro ao deletar"];
-            return $msg;
-        }
-        return ["msg" => "delete oh yes"];
-    }
+    //     if ($competencia) {
+    //         $success = $competencia->delete();
+    //         return $success ?
+    //             response()->json(["msg" => "deletado com sucesso"], 200)
+    //             : response()->json(["msg" => "Erro ao Deletar"], 422);
+    //     }
+    //     return ["msg" => "delete oh yes"];
+    // }
 }

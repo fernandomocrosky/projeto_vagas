@@ -17,6 +17,8 @@ export default function EditarUsuario({ params }) {
   const initialValues = {
     nome: user.nome,
     email: user.email,
+    experiencias: user.experiencias,
+    competencias: user.competencias,
   };
 
   useEffect(() => {

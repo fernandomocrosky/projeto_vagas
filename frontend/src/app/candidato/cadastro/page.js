@@ -17,6 +17,8 @@ function CadastroCandidatoPage() {
     nome: '',
     email: '',
     senha: '',
+    experiencias: [],
+    competencias: []
   };
 
   useEffect(() => {
@@ -62,6 +64,7 @@ function CadastroCandidatoPage() {
       <CandidatoForm
         handleSubmit={handleSubmit}
         initialValues={initialValues}
+        cadastro
       />
     </div>
   );

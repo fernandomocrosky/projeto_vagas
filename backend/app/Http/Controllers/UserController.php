@@ -42,8 +42,8 @@ class UserController extends Controller
             $userToUpdate->save();
         }
 
+        CandidatoCompetencia::where("candidato_id", $candidato->id)->delete();
         if ($request->competencias) {
-            CandidatoCompetencia::where("candidato_id", userToUpdate->id)->delete();
             foreach ($request->competencias as $competencia) {
                 $competenciaId = $competencia["id"];
                 $relacao = new CandidatoCompetencia();

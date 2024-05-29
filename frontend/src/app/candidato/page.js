@@ -43,7 +43,7 @@ function CandidatoPage() {
       <div>
         <button
           className="btn btn-success"
-          onClick={() => router.push(`candidato/${user.id}/editar`)}>
+          onClick={() => router.push(`candidato/editar`)}>
           Editar
         </button>
         <button

@@ -1,10 +1,10 @@
 'use client';
 import { useEffect } from 'react';
-import { useUser } from '../../../_stores/useUser';
+import { useUser } from '../../_stores/useUser';
 import { useRouter } from 'next/navigation';
-import { getUserByToken } from '../../../../auth/api';
-import EmpresaForm from '../../../components/EmpresaForm';
-import { updateEmpresa } from '../../../_api/empresa';
+import { getUserByToken } from '../../../auth/api';
+import EmpresaForm from '../../components/EmpresaForm';
+import { updateEmpresa } from '../../_api/empresa';
 import Swal from 'sweetalert2';
 
 function EmpresaEditPage({ params }) {

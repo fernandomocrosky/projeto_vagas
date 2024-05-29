@@ -1,11 +1,11 @@
 'use client';
-import { useUser } from '../../../_stores/useUser';
+import { useUser } from '../../_stores/useUser';
 import { useRouter } from 'next/navigation';
-import { updateCandidato } from '../../../_api/candidato';
-import CandidatoForm from '../../../components/CandidatoForm';
+import { updateCandidato } from '../../_api/candidato';
+import CandidatoForm from '../../components/CandidatoForm';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
-import { getUserByToken } from '../../../../auth/api';
+import { getUserByToken } from '../../../auth/api';
 
 export default function EditarUsuario({ params }) {
   const router = useRouter();

@@ -51,36 +51,36 @@ function CandidatoForm({ handleSubmit, initialValues, cadastro }) {
               {!cadastro && (
                 <>
                   <h4>Experiencias</h4>
-                  <FieldArray name="experiencias">
+                  <FieldArray name="experiencia">
                     {({ insert, remove, push }) => (
                       <div>
-                        {values.experiencias.length > 0 &&
-                          values.experiencias.map((exp, idx) => (
+                        {values.experiencia.length > 0 &&
+                          values.experiencia.map((exp, idx) => (
                             <div
                               key={idx}
                               className="row">
                               <div className="col-4">
                                 <Field
-                                  name={`experiencias.${idx}.nome_empresa`}
+                                  name={`experiencia.${idx}.nome_empresa`}
                                   placeholder="Nome Empresa"
                                 />
                               </div>
                               <div className="col-4">
                                 <Field
-                                  name={`experiencias.${idx}.cargo`}
+                                  name={`experiencia.${idx}.cargo`}
                                   placeholder="Cargo"
                                 />
                               </div>
                               <div className="col-2">
                                 <Field
-                                  name={`experiencias.${idx}.inicio`}
+                                  name={`experiencia.${idx}.inicio`}
                                   placeholder="inicio"
                                   type="date"
                                 />
                               </div>
                               <div className="col-2">
                                 <Field
-                                  name={`experiencias.${idx}.fim`}
+                                  name={`experiencia.${idx}.fim`}
                                   placeholder="fim"
                                   type="date"
                                 />

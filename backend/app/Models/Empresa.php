@@ -45,7 +45,7 @@ class Empresa extends Model
 
     public function vagas()
     {
-        return $this->hasMany(Vagas::class, "empresa_id", "id");
+        return $this->hasMany(Vaga::class, "empresa_id", "id");
     }
 
     public function user()

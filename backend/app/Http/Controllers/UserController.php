@@ -55,8 +55,8 @@ class UserController extends Controller
 
         Experiencia::where("candidato_id", $candidato->id)->delete();
 
-        if ($request->experiencias) {
-            foreach ($request->experiencias as $exp) {
+        if ($request->experiencia) {
+            foreach ($request->experiencia as $exp) {
                 $alreadyAssoc = $candidato->experiencias()->where([
                     "nome_empresa" => $exp["nome_empresa"],
                     "cargo" => $exp["cargo"],

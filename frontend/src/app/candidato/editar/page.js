@@ -17,7 +17,7 @@ export default function EditarUsuario({ params }) {
   const initialValues = {
     nome: user.nome,
     email: user.email,
-    experiencias: user.experiencias,
+    experiencia: user.experiencia,
     competencias: user.competencias,
   };
 

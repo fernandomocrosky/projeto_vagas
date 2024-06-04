@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vagas extends Model
+class Vaga extends Model
 {
     protected $fillable = ["nome", "divulgavel", "disponivel", "descricao"];
     use HasFactory;
@@ -19,5 +19,15 @@ class Vagas extends Model
     public function candidatos()
     {
         return $this->belongsToMany(Candidato::class, "candidato_vaga", "vaga_id", "candidato_id");
+    }
+
+    public function competencias()
+    {
+        return $this->belongsToMany(Competencia::class, "vaga_competencia", "vaga_id", "competencia_id");
+    }
+
+    public function ramo()
+    {
+        return $this->belongsTo(Ramo::class, "ramo_id", "id");
     }
 }

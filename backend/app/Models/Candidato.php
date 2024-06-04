@@ -50,7 +50,7 @@ class Candidato extends Model
 
     public function vagas()
     {
-        return $this->belongsToMany(Vagas::class, "candidato_vaga", "candidato_id", "vaga_id", "id");
+        return $this->belongsToMany(Vaga::class, "candidato_vaga", "candidato_id", "vaga_id", "id");
     }
 
     public function user()

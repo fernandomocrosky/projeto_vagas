@@ -15,4 +15,9 @@ class Competencia extends Model
     {
         return $this->belongsToMany(Candidato::class, "candidato_competencia", "competencia_id", "user_id");
     }
+
+    public function vagas()
+    {
+        return $this->belongsToMany(Vaga::class, "vaga_competencia", "competencia_id", "vaga_id");
+    }
 }

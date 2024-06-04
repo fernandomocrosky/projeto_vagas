@@ -13,13 +13,20 @@ return new class extends Migration
     {
         Schema::create('vagas', function (Blueprint $table) {
             $table->id();
-            $table->string("nome");
-            $table->boolean("divulgavel")->default(true);
-            $table->boolean("disponivel")->default(true);
+            $table->string("titulo");
             $table->string("descricao");
+            $table->smallInteger("experiencia");
+            $table->float("salario_min", 2);
+            $table->float("salario_max", 2);
+            $table->boolean("ativo")->default(true);
             $table->timestamps();
 
-            $table->foreignId("empresa_id")->references("id")->on("empresas");
+            $table
+                ->foreignId("empresa_id")
+                ->references("id")
+                ->on("empresas")
+                ->onUpdate("CASCADE")
+                ->onDelete("CASCADE");
         });
     }
 

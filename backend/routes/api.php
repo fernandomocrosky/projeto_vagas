@@ -6,8 +6,10 @@ use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ExperienciaController;
+use App\Http\Controllers\RamoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VagasController;
+use App\Http\Controllers\VagaController;
+
 
 Route::post("/login", [AuthController::class, "login"]);
 Route::get("/", [AuthController::class, "get"]);
@@ -35,7 +37,7 @@ Route::prefix("/usuarios")->group(function () {
 });
 
 
-Route::prefix("/vagas")->controller(VagasController::class)->group(function () {
+Route::prefix("/vagas")->controller(VagaController::class)->group(function () {
   Route::get("/", "list");
   Route::post("/", "create");
 
@@ -61,3 +63,5 @@ Route::prefix("/competencias")->controller(CompetenciaController::class)->group(
   Route::put("/{id}", "update");
   Route::delete("/{id}", "delete");
 });
+
+Route::get("/ramos", [RamoController::class, "get"]);

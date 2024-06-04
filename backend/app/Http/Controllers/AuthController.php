@@ -81,7 +81,7 @@ class AuthController extends Controller
                 "tipo" => $me->tipo,
                 "nome" => $user->nome,
                 "competencias" => $user->competencias,
-                "experiencias" => $user->experiencias
+                "experiencia" => $user->experiencias
             ], 200);
         }
     }

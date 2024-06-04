@@ -50,17 +50,23 @@ function HomeEmpresa() {
   return (
     <AuthComponent>
       <div>Logado com sucesso como empresa</div>
-      <div>
+      <div className="d-flex justify-content-around">
         <button
           className="btn btn-success"
-          onClick={() => router.push(`empresa/${user.id}/editar`)}>
+          onClick={() => router.push(`empresa/editar`)}>
           Editar
+        </button>
+        <button
+          className="btn btn-dark"
+          onClick={() => router.push(`empresa/vagas`)}>
+          Vagas
         </button>
         <button
           className="btn btn-danger"
           onClick={() => handleDelete(user.id)}>
           Deletar
         </button>
+
         <LogoutButton />
       </div>
     </AuthComponent>

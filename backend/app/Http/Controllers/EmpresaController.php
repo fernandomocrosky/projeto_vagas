@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Empresa;
 use App\Models\User;
+use App\Models\Vaga;
 use Illuminate\Support\Facades\Validator;
 
 class EmpresaController extends Controller

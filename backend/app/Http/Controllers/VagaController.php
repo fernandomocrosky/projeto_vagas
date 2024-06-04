@@ -12,6 +12,15 @@ class VagaController extends Controller
 
     function list()
     {
+        $user = auth("api")->user();
+
+        if (strtolower($user->tipo) === "empresa") {
+            $vagas = Vaga::with(["competencias", "ramo"])
+                ->where("empresa_id", $user->id)->get();
+
+            return $vagas;
+        }
+
         $vagas = Vaga::with(["competencias", "ramo"])->get();
         if (!$vagas->isEmpty()) {
             return $vagas;

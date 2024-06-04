@@ -37,7 +37,7 @@ Route::prefix("/usuarios")->group(function () {
 });
 
 
-Route::prefix("/vagas")->controller(VagaController::class)->group(function () {
+Route::prefix("/vagas")->middleware("jwt.auth")->controller(VagaController::class)->group(function () {
   Route::get("/", "list");
   Route::post("/", "create");
 

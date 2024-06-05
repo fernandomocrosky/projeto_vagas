@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class VagaCompetencia extends Model
 {
     protected $fillable = ["vaga_id", "competencia_id"];
+    protected $table = "competencia_vaga";
+
+    public $timestamps = false;
     use HasFactory;
 }

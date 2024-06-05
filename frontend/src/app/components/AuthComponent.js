@@ -14,7 +14,7 @@ function AuthComponent({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(user);
+
     if (!token) {
       router.push('/login');
     } else {

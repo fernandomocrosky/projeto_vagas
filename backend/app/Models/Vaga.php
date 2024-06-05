@@ -23,7 +23,7 @@ class Vaga extends Model
 
     public function competencias()
     {
-        return $this->belongsToMany(Competencia::class, "vaga_competencia", "vaga_id", "competencia_id");
+        return $this->belongsToMany(Competencia::class, "competencia_vaga", "vaga_id", "competencia_id");
     }
 
     public function ramo()

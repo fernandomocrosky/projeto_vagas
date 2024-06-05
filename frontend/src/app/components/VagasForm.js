@@ -64,9 +64,8 @@ function VagasForm({ handleSubmit, initialValues, edit }) {
                 as="select">
                 <option
                   value=""
-                  selected
-                  disabled
-                  hidden>
+                  selected="selected"
+                  disabled>
                   Selecione um Ramo
                 </option>
                 {ramos.map((ramo, index) => (

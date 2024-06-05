@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 function EmpresaCadastroPage() {
   const router = useRouter();
-  const { user } = useUser((state) => ({
+  const { user, setUser } = useUser((state) => ({
     user: state.user,
     setUser: state.setUser,
   }));

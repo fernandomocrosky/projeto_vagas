@@ -50,7 +50,6 @@ export default function EmpresaVagas() {
               <th scope="col">Descrição</th>
               <th scope="col">Salário Minimo</th>
               <th scope="col">Salário Máximo</th>
-              <th scope="col">Ramo</th>
               <th scope="col">Editar</th>
               <th scope="col">Deletar</th>
             </tr>
@@ -64,7 +63,6 @@ export default function EmpresaVagas() {
                 <td>{vaga.descricao.slice(0, 20)}</td>
                 <td>{vaga.salario_min ? vaga.salario_min : '0'}</td>
                 <td>{vaga.salario_max ? vaga.salario_max : '0'}</td>
-                <td>{vaga.ramo.nome}</td>
                 <td>
                   <button
                     className="btn btn-sm btn-success"

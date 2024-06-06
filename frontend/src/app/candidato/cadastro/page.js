@@ -17,7 +17,7 @@ function CadastroCandidatoPage() {
     nome: '',
     email: '',
     senha: '',
-    experiencias: [],
+    experiencia: [],
     competencias: [],
   };
 

@@ -1,10 +1,13 @@
 'use client';
 import VagasForm from '../../../components/VagasForm';
+import { useEffect, useState } from 'react';
 import { createVaga } from '../../../_api/vagas';
 import { useRouter } from 'next/navigation';
+import { getCompetencias } from '../../../_api/competencias';
 
 export default function VagasCadastro() {
   const router = useRouter();
+  const [competencias, setCompetencias] = useState([]);
 
   const initialValues = {
     titulo: null,
@@ -16,11 +19,26 @@ export default function VagasCadastro() {
     ativo: true,
   };
 
+  useEffect(() => {
+    getCompetencias()
+      .then((res) => {
+        setCompetencias(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   const handleSubmit = (values) => {
-    console.log(values)
-    values.competencias = values.competencias.map((com) => JSON.parse(com))
-    values.ramo_id = parseInt(values.ramo_id)
-    values.experiencia = parseInt(values.experiencia)
+    values.competencias = values.competencias.map((competencia) => {
+      competencia.id = parseInt(competencia.id);
+      const comAchada = competencias.filter((com) => com.id == competencia.id);
+      return {
+        id: parseInt(competencia.id),
+        nome: comAchada[0].nome,
+      };
+    });
+    console.log(values);
+    values.ramo_id = parseInt(values.ramo_id);
+    values.experiencia = parseInt(values.experiencia);
     createVaga(values).then(() => router.push('/empresa/vagas'));
   };
 
@@ -30,6 +48,7 @@ export default function VagasCadastro() {
       <VagasForm
         initialValues={initialValues}
         handleSubmit={handleSubmit}
+        competencias={competencias}
       />
     </div>
   );

@@ -36,6 +36,7 @@ class UserController extends Controller
 
         $userToUpdate = User::with("empresa")->find($user->id);
         $candidato = Candidato::find($user->id);
+        $candidato->nome = $request->nome;
 
         if (key_exists("email", $requestData)) {
             $userToUpdate->email = $requestData["email"];
@@ -61,14 +62,14 @@ class UserController extends Controller
                     "nome_empresa" => $exp["nome_empresa"],
                     "cargo" => $exp["cargo"],
                     "inicio" => $exp["inicio"],
-                    "fim" => $exp["fim"],
+                    "fim" => key_exists('fim', $exp) ? $exp["fim"] : null,
                 ])->get();
                 if ($alreadyAssoc->isEmpty()) {
                     $experiencia = new Experiencia();
                     $experiencia->cargo = $exp["cargo"];
                     $experiencia->nome_empresa = $exp["nome_empresa"];
                     $experiencia->inicio = $exp["inicio"];
-                    $experiencia->fim = $exp["fim"];
+                    $experiencia->fim = key_exists('fim', $exp) ? $exp["fim"] : null;
                     $experiencia->candidato_id = $candidato->id;
 
                     $experiencia->save();

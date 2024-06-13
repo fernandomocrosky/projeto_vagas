@@ -42,7 +42,7 @@ function CadastroCandidatoPage() {
   }, []);
 
   const handleSubmit = (values) => {
-    const data = {...values, senha: md5(values.senha)}
+    const data = { ...values, senha: md5(values.senha) };
     registerCandidato(data)
       .then(async (res) => {
         await Swal.fire({

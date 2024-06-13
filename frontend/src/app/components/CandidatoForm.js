@@ -6,17 +6,8 @@ import { useUser } from '../_stores/useUser';
 import styles from '../styles/components/LoginForm.module.css';
 import React from 'react';
 
-function CandidatoForm({ handleSubmit, initialValues, cadastro }) {
+function CandidatoForm({ handleSubmit, initialValues, cadastro, competencias }) {
   const { user } = useUser((state) => ({ user: state.user }));
-  const [competencias, setCompetencias] = React.useState([]);
-
-  React.useEffect(() => {
-    getCompetencias()
-      .then((res) => {
-        setCompetencias(res.data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
 
   return (
     <Formik

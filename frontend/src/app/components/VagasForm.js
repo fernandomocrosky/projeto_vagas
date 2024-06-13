@@ -1,23 +1,15 @@
 'use client';
 import { Formik, Form, Field, FieldArray } from 'formik';
-import { getCompetencias } from '../_api/competencias';
 import { getRamos } from '../_api/ramos';
 import styles from '../styles/components/LoginForm.module.css';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-function VagasForm({ handleSubmit, initialValues, edit }) {
-  const [competencias, setCompetencias] = React.useState([]);
+function VagasForm({ handleSubmit, initialValues, edit, competencias }) {
   const [ramos, setRamos] = React.useState([]);
   const router = useRouter();
 
   React.useEffect(() => {
-    getCompetencias()
-      .then((res) => {
-        setCompetencias(res.data);
-      })
-      .catch((err) => console.log(err));
-
     getRamos()
       .then((res) => {
         setRamos(res.data);
@@ -89,12 +81,12 @@ function VagasForm({ handleSubmit, initialValues, edit }) {
                           className="row">
                           <div>
                             <Field
-                              name={`competencias.${idx}`}
+                              name={`competencias.${idx}.id`}
                               as="select">
                               {competencias.map((com, index) => (
                                 <option
                                   key={index}
-                                  value={JSON.stringify(com)}
+                                  value={com.id}
                                   label={com.nome}>
                                   {com.nome}
                                 </option>

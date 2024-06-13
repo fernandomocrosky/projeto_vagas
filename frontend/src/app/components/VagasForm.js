@@ -89,12 +89,12 @@ function VagasForm({ handleSubmit, initialValues, edit }) {
                           className="row">
                           <div>
                             <Field
-                              name={`competencias.${idx}.id`}
+                              name={`competencias.${idx}`}
                               as="select">
                               {competencias.map((com, index) => (
                                 <option
                                   key={index}
-                                  value={com.id}
+                                  value={JSON.stringify(com)}
                                   label={com.nome}>
                                   {com.nome}
                                 </option>

@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $requestData = $request->all();
         $user = auth("api")->user();
-        if ($user->tipo === "Empresa") {
+        if (strtolower($user->tipo) === "empresa") {
             $userToUpdate = User::with("empresa")->find($user->id);
             $empresa = Empresa::find($user->id);
             foreach ($requestData as $key => $value) {
@@ -86,7 +86,7 @@ class UserController extends Controller
     public function delete()
     {
         $user = auth("api")->user();
-        if ($user->tipo === "Empresa") {
+        if (strtolower($user->tipo) === "empresa") {
             $user = User::find($user->id);
             $user->delete();
             return ["msg" => "Deletado com sucesso"];

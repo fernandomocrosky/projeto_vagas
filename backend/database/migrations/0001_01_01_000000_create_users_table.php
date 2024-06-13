@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('senha');
             $table->rememberToken();
-            $table->enum("tipo", ["Empresa", "Candidato"]);
+            $table->enum("tipo", ["empresa", "candidato"]);
             $table->timestamps();
         });
 

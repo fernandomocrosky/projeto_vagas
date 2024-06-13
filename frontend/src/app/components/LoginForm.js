@@ -6,6 +6,7 @@ import { getUserByToken, login } from '../../auth/api';
 import { useUser } from '../_stores/useUser';
 import React from 'react';
 import styles from '../styles/components/LoginForm.module.css';
+import { md5 } from 'js-md5';
 
 const initialValues = {
   email: '',
@@ -20,7 +21,8 @@ function LoginForm() {
   }));
 
   const handleSubmit = (values) => {
-    login(values)
+    const data = {...values, senha: md5(values.senha)}
+    login(data)
       .then(async (res) => {
         await Swal.fire({
           title: 'success',

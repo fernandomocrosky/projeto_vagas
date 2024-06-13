@@ -5,6 +5,7 @@ import { useUser } from '../../_stores/useUser';
 import { useEffect } from 'react';
 import { getUserByToken, registerCandidato } from '../../../auth/api';
 import { useRouter } from 'next/navigation';
+import { md5 } from 'js-md5';
 
 function CadastroCandidatoPage() {
   const router = useRouter();
@@ -41,7 +42,8 @@ function CadastroCandidatoPage() {
   }, []);
 
   const handleSubmit = (values) => {
-    registerCandidato(values)
+    const data = {...values, senha: md5(values.senha)}
+    registerCandidato(data)
       .then(async (res) => {
         await Swal.fire({
           title: 'Sucesso',

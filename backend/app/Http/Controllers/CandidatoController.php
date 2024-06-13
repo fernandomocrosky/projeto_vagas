@@ -49,7 +49,7 @@ class CandidatoController extends Controller
         $user = new User();
         $user->email = $requestData["email"];
         $user->senha = $requestData["senha"];
-        $user->tipo = "Candidato";
+        $user->tipo = "candidato";
         $user->save();
 
         $candidato = new Candidato();

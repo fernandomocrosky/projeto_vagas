@@ -62,7 +62,7 @@ class AuthController extends Controller
     {
         $me = auth("api")->user();
         $user = null;
-        if ($me->tipo === "Empresa") {
+        if (strtolower($me->tipo) === "empresa") {
             $user = Empresa::find($me->id);
 
             return response()->json([

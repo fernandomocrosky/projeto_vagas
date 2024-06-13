@@ -5,6 +5,7 @@ import { useUser } from '../../_stores/useUser';
 import { useEffect } from 'react';
 import { getUserByToken, registerEmpresa } from '../../../auth/api';
 import Swal from 'sweetalert2';
+import md5 from 'js-md5';
 
 function EmpresaCadastroPage() {
   const router = useRouter();
@@ -41,7 +42,8 @@ function EmpresaCadastroPage() {
   }, []);
 
   const handleSubmit = (values) => {
-    registerEmpresa(values)
+    const data = {...values, senha: md5(values.senha)}
+    registerEmpresa(data)
       .then(async (res) => {
         await Swal.fire({
           title: 'Sucesso',

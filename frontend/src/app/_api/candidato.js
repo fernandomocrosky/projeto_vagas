@@ -10,6 +10,14 @@ export const updateCandidato = (data) => {
   });
 };
 
+export const listCandidatos = (data) => {
+  return axios.post(`${apiRoute}/usuarios/candidatos/buscar`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
+};
+
 export const deleteCandidato = () => {
   return axios.delete(`${apiRoute}/usuario`, {
     headers: {

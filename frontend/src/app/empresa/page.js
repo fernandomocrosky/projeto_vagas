@@ -62,6 +62,11 @@ function HomeEmpresa() {
           Vagas
         </button>
         <button
+          className="btn btn-dark"
+          onClick={() => router.push(`empresa/candidatos`)}>
+          Candidatos
+        </button>
+        <button
           className="btn btn-danger"
           onClick={() => handleDelete(user.id)}>
           Deletar

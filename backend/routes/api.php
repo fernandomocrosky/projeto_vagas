@@ -26,6 +26,7 @@ Route::prefix("/usuarios")->group(function () {
   Route::prefix("/candidatos")->controller(CandidatoController::class)->group(function () {
     Route::post("/", "create");
     Route::get("/{id}", "show")->middleware("jwt.auth");
+    Route::post("/buscar", "listCandidatos")->middleware("jwt.auth");
   });
 
   Route::prefix("/empresa")->controller(EmpresaController::class)->group(function () {

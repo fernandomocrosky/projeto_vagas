@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class VagaController extends Controller
 {
 
-    function list()
+    function list(Request $request)
     {
         $user = auth("api")->user();
 
@@ -21,11 +21,8 @@ class VagaController extends Controller
             return $vagas;
         }
 
-        $vagas = Vaga::with(["competencias", "ramo"])->get();
-        if (!$vagas->isEmpty()) {
-            return response()->json($vagas, 200);
-        }
-        return response()->json(["mensagem" => "Não existe vagas cadastradas"], 204);
+        $vagas = Vaga::with(["competencias", "ramo"])->where('ativo', 1)->get();
+        return response()->json($vagas, 200);
     }
 
     function create(Request $request)

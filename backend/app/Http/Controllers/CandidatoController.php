@@ -118,6 +118,26 @@ class CandidatoController extends Controller
         return $candidato;
     }
 
+    function listCandidatos(Request $request)
+    {
+        $competencias = [];
+
+        foreach ($request->competencias as $competencia) {
+            $competencias[] = $competencia['id'];
+        }
+
+        $candidatos = Candidato::with(['competencias', 'experiencias'])
+            ->where(function ($query) use ($competencias) {
+                foreach ($competencias as $competencia) {
+                    $query->whereHas('competencias', function ($subquery) use ($competencia) {
+                        $subquery->where('competencia_id', $competencia);
+                    });
+                }
+            })->get();
+
+        return response()->json($candidatos, 200);
+    }
+
     function delete($id)
     {
         $candidato = $this->candidato->with(["user" => function ($query) {

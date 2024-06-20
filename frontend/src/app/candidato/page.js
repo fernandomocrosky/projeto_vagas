@@ -47,6 +47,11 @@ function CandidatoPage() {
           Editar
         </button>
         <button
+          className="btn btn-dark"
+          onClick={() => router.push('/candidato/vagas')}>
+          Vagas
+        </button>
+        <button
           className="btn btn-danger"
           onClick={() => handleDelete(user.id)}>
           Deletar
